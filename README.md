@@ -1,4 +1,4 @@
-[form-condominium]()
+[form-yup]()
 
 ### Install
 <hr>
