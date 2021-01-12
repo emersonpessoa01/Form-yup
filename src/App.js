@@ -100,10 +100,11 @@ export default function App() {
         validationSchema={Yup.object().shape({
           name: Yup.string().min(2).required("Campo obrigatório"),
           email: Yup.string().email().required("Campo obrigatório"),
-          cpf: Yup.string().required("Campo obrigatório"),
-          cnpj: Yup.string().required("Campo obrigatório"),
-          phone: Yup.string().required("Campo obrigatório"),
-          cep: Yup.string().required("Campo obrigatório"),
+          cpf: Yup.string().min(11).required("Campo obrigatório"),
+          cnpj: Yup.string().min(14).required("Campo obrigatório"),
+          phone: Yup.string().min(11).required("Campo obrigatório"),
+          cep: Yup.string().min(8).required("Campo obrigatório"),
+          
         })}
       >
         {(props) => {
