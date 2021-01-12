@@ -46,7 +46,7 @@ export default function App() {
       <h1>Bem-vindo ao Condomínio </h1>
 
       <Formik
-        initialValues={{ phone: "", cpf: "",name:"" }}
+        initialValues={{ phone: "", cpf: "", name: "",user:"" }}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
@@ -57,6 +57,8 @@ export default function App() {
         validationSchema={Yup.object().shape({
           cpf: Yup.string().required("Campo obrigatório"),
           phone: Yup.string().required("Campo obrigatório"),
+          name: Yup.string().required("Campo obrigatório"),
+          user: Yup.string().required("Campo obrigatório"),
         })}
       >
         {(props) => {
@@ -73,7 +75,6 @@ export default function App() {
 
           return (
             <form onSubmit={handleSubmit}>
-
               <label htmlFor="cpf" style={{ display: "block" }}>
                 {" "}
                 Cpf{" "}
@@ -114,7 +115,7 @@ export default function App() {
                     {...field}
                     mask={phoneNumberMask}
                     id="phone"
-                    placeholder="Digite seu cpf"
+                    placeholder="Digite seu celular"
                     type="text"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -131,31 +132,47 @@ export default function App() {
                 <div className="input-feedback">{errors.phone}</div>
               )}
 
-
               <label htmlFor="name" style={{ display: "block" }}>
                 {" "}
                 Nome{" "}
               </label>
               <Field
                 name="name"
-                render={({ field }) => (
-                  <MaskedInput
-                    {...field}
-                    id="name"
-                    placeholder="Nome completo"
-                    type="text"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    className={
-                      errors.name && touched.name
-                        ? "text-input error"
-                        : "text-input"
-                    }
-                  />
-                )}
+                id="name"
+                placeholder="Nome completo"
+                type="text"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={
+                  errors.name && touched.name
+                    ? "text-input error"
+                    : "text-input"
+                }
               />
 
               {errors.name && touched.name && (
+                <div className="input-feedback">{errors.name}</div>
+              )}
+
+              <label htmlFor="user" style={{ display: "block" }}>
+                {" "}
+                Email{" "}
+              </label>
+              <Field
+                name="user"
+                id="user"
+                placeholder="email@example.com"
+                type="text"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className={
+                  errors.user && touched.user
+                    ? "text-input error"
+                    : "text-input"
+                }
+              />
+
+              {errors.user && touched.user && (
                 <div className="input-feedback">{errors.name}</div>
               )}
 
