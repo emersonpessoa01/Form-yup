@@ -82,7 +82,14 @@ export default function App() {
       <h1>Bem-vindo ao Condomínio </h1>
 
       <Formik
-        initialValues={{ phone: "", cpf: "", name: "", email : "", cep:"",cnpj:"", }}
+        initialValues={{
+          name: "",
+          email: "",
+          cpf: "",
+          cnpj: "",
+          phone: "",
+          cep: "",
+        }}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
