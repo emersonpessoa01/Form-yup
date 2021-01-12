@@ -40,13 +40,48 @@ const cpfNumberMask = [
   /\d/,
 ];
 
+const cnpjNumberMask = [
+  /[1-9]/,
+  /\d/,
+  ".",
+  " ",
+  /\d/,
+  /\d/,
+  /\d/,
+  ".",
+  /\d/,
+  /\d/,
+  /\d/,
+  "/",
+  /\d/,
+  /\d/,
+  /\d/,
+  /\d/,
+  "-",
+  /\d/,
+  /\d/,
+];
+const cepNumberMask = [
+  /[1-9]/,
+  /\d/,
+  ".",
+  " ",
+  /\d/,
+  /\d/,
+  /\d/,
+  ".",
+  /\d/,
+  /\d/,
+  /\d/,
+];
+
 export default function App() {
   return (
     <div className="app">
       <h1>Bem-vindo ao Condomínio </h1>
 
       <Formik
-        initialValues={{ phone: "", cpf: "", name: "",user:"" }}
+        initialValues={{ phone: "", cpf: "", name: "", user: "", cep:"",cnpj:"", }}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
@@ -55,10 +90,12 @@ export default function App() {
           }, 500);
         }}
         validationSchema={Yup.object().shape({
-          cpf: Yup.string().required("Campo obrigatório"),
-          phone: Yup.string().required("Campo obrigatório"),
           name: Yup.string().required("Campo obrigatório"),
           user: Yup.string().required("Campo obrigatório"),
+          cpf: Yup.string().required("Campo obrigatório"),
+          cnpj: Yup.string().required("Campo obrigatório"),
+          phone: Yup.string().required("Campo obrigatório"),
+          cep: Yup.string().required("Campo obrigatório"),
         })}
       >
         {(props) => {
@@ -75,68 +112,12 @@ export default function App() {
 
           return (
             <form onSubmit={handleSubmit}>
-              <label htmlFor="cpf" style={{ display: "block" }}>
-                {" "}
-                Cpf{" "}
-              </label>
-              <Field
-                name="cpf"
-                render={({ field }) => (
-                  <MaskedInput
-                    {...field}
-                    autoFocus
-                    mask={cpfNumberMask}
-                    id="cpf"
-                    placeholder="Digite seu cpf"
-                    type="text"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    className={
-                      errors.cpf && touched.cpf
-                        ? "text-input error"
-                        : "text-input"
-                    }
-                  />
-                )}
-              />
-
-              {errors.cpf && touched.cpf && (
-                <div className="input-feedback">{errors.cpf}</div>
-              )}
-
-              <label htmlFor="phone" style={{ display: "block" }}>
-                {" "}
-                Celular{" "}
-              </label>
-              <Field
-                name="phone"
-                render={({ field }) => (
-                  <MaskedInput
-                    {...field}
-                    mask={phoneNumberMask}
-                    id="phone"
-                    placeholder="Digite seu celular"
-                    type="text"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    className={
-                      errors.phone && touched.phone
-                        ? "text-input error"
-                        : "text-input"
-                    }
-                  />
-                )}
-              />
-
-              {errors.phone && touched.phone && (
-                <div className="input-feedback">{errors.phone}</div>
-              )}
-
               <label htmlFor="name" style={{ display: "block" }}>
                 {" "}
                 Nome{" "}
               </label>
               <Field
+                autoFocus
                 name="name"
                 id="name"
                 placeholder="Nome completo"
@@ -173,7 +154,119 @@ export default function App() {
               />
 
               {errors.user && touched.user && (
-                <div className="input-feedback">{errors.name}</div>
+                <div className="input-feedback">{errors.user}</div>
+              )}
+
+              <label htmlFor="cpf" style={{ display: "block" }}>
+                {" "}
+                Cpf{" "}
+              </label>
+              <Field
+                name="cpf"
+                render={({ field }) => (
+                  <MaskedInput
+                    {...field}
+                    mask={cpfNumberMask}
+                    id="cpf"
+                    placeholder="Digite seu cpf"
+                    type="text"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={
+                      errors.cpf && touched.cpf
+                        ? "text-input error"
+                        : "text-input"
+                    }
+                  />
+                )}
+              />
+
+              {errors.cpf && touched.cpf && (
+                <div className="input-feedback">{errors.cpf}</div>
+              )}
+
+              <label htmlFor="cnpj" style={{ display: "block" }}>
+                {" "}
+                Cnpj{" "}
+              </label>
+              <Field
+                name="cnpj"
+                render={({ field }) => (
+                  <MaskedInput
+                    {...field}
+                    mask={cnpjNumberMask}
+                    id="cnpj"
+                    placeholder="Digite seu cnpj"
+                    type="text"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={
+                      errors.cnpj && touched.cnpj
+                        ? "text-input error"
+                        : "text-input"
+                    }
+                  />
+                )}
+              />
+
+              {errors.cnpj && touched.cnpj && (
+                <div className="input-feedback">{errors.cnpj}</div>
+              )}
+
+              <label htmlFor="phone" style={{ display: "block" }}>
+                {" "}
+                Celular{" "}
+              </label>
+              <Field
+                name="phone"
+                render={({ field }) => (
+                  <MaskedInput
+                    {...field}
+                    mask={phoneNumberMask}
+                    id="phone"
+                    placeholder="Digite seu celular"
+                    type="text"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={
+                      errors.phone && touched.phone
+                        ? "text-input error"
+                        : "text-input"
+                    }
+                  />
+                )}
+              />
+
+              {errors.phone && touched.phone && (
+                <div className="input-feedback">{errors.phone}</div>
+              )}
+
+              <label htmlFor="cep" style={{ display: "block" }}>
+                {" "}
+                Cep{" "}
+              </label>
+              <Field
+                name="cep"
+                render={({ field }) => (
+                  <MaskedInput
+                    {...field}
+                    mask={cepNumberMask}
+                    id="cep"
+                    placeholder="Digite seu cep"
+                    type="text"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={
+                      errors.cep && touched.cep
+                        ? "text-input error"
+                        : "text-input"
+                    }
+                  />
+                )}
+              />
+
+              {errors.cep && touched.cep && (
+                <div className="input-feedback">{errors.cep}</div>
               )}
 
               <button
