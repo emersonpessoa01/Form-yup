@@ -82,7 +82,7 @@ export default function App() {
       <h1>Bem-vindo ao Condomínio </h1>
 
       <Formik
-        initialValues={{ phone: "", cpf: "", name: "", user: "", cep:"",cnpj:"", }}
+        initialValues={{ phone: "", cpf: "", name: "", email : "", cep:"",cnpj:"", }}
         onSubmit={(values, { setSubmitting }) => {
           setTimeout(() => {
             alert(JSON.stringify(values, null, 2));
@@ -91,8 +91,8 @@ export default function App() {
           }, 500);
         }}
         validationSchema={Yup.object().shape({
-          name: Yup.string().required("Campo obrigatório"),
-          user: Yup.string().required("Campo obrigatório"),
+          name: Yup.string().min(2).required("Campo obrigatório"),
+          email: Yup.string().email().required("Campo obrigatório"),
           cpf: Yup.string().required("Campo obrigatório"),
           cnpj: Yup.string().required("Campo obrigatório"),
           phone: Yup.string().required("Campo obrigatório"),
@@ -136,15 +136,15 @@ export default function App() {
                 <div className="input-feedback">{errors.name}</div>
               )}
 
-              <label htmlFor="user" style={{ display: "block" }}>
+              <label htmlFor="email" style={{ display: "block" }}>
                 {" "}
                 Email{" "}
               </label>
               <Field
-                name="user"
-                id="user"
+                name="email"
+                id="email"
                 placeholder="email@example.com"
-                type="text"
+                type="email"
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className={
@@ -154,8 +154,8 @@ export default function App() {
                 }
               />
 
-              {errors.user && touched.user && (
-                <div className="input-feedback">{errors.user}</div>
+              {errors.email && touched.email && (
+                <div className="input-feedback">{errors.email}</div>
               )}
 
               <label htmlFor="cpf" style={{ display: "block" }}>
