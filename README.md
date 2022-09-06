@@ -1,4 +1,4 @@
-[form-yup](https://form-yup.netlify.app/)
+[form-yup](https://form-yup-nu.vercel.app/)
 
 ### Install
 <hr>
